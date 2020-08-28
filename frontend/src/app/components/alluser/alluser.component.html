@@ -1,0 +1,118 @@
+<div>
+    <button (click)="addUser()" class="button button2">AddUser</button>
+</div>
+<div style="padding-left:20px">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>Created date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="userlist && userlist.length>0">
+                    <tr *ngFor="let list of userlist; let i = index">
+                        <td> {{i+1}} </td>
+                        <td> {{list.username}} </td>
+                        <td> {{list.firstname}} </td>
+                        <td> {{list.lastname}} </td>
+                        <td> {{list.age}} </td>
+                        <td style="
+                        overflow: auto;
+                        max-width: 15px;
+                    "> {{list.address}} </td>
+                        <td> {{list.createddate | date }}</td>
+                        <td>
+                            <a (click)="edituser(list)"><i class="far fa-edit"></i>edit</a>
+                            <a (click)="deleteUser(list)"><i class="far fa-edit"></i>delete</a>
+                            <!-- <div style="float: left; margin-left:5px"><a class=""
+                                    [routerLink]="['/program/course-detail','original',course.universityid,course.campusname,course.courseid]"
+                                    target="_blank"><i class="fa fa-eye" data-toggle="tooltip" title="View University"
+                                        data-original-title="Edit" aria-label="edit_issue"></i></a></div> -->
+
+                        </td>
+                    </tr>
+                </ng-container>
+                <tr class="text-center text-color-red" *ngIf="!userlist || userlist.length == 0">
+                    <td colspan="6">
+                        No course found
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+<br>
+<div style="padding-left:20px" *ngIf="editflag || addflag">
+    <div class="container">
+        <div class="row">
+            <div class="col-25">
+                <label for="username">User Name : </label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="username" name="username" [(ngModel)]="euser.username"
+                    placeholder="Your Username..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="firstname">First Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="firstname" name="firstname" [(ngModel)]="euser.firstname"
+                    placeholder="Your firstname..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="lastname">Last Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="lastname" name="lastname" [(ngModel)]="euser.lastname"
+                    placeholder="Your lastname..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="password">Password</label>
+            </div>
+            <div class="col-75">
+                <input type="password" id="password" name="password" [(ngModel)]="euser.hash"
+                    placeholder="Your Password..">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="age">Age</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="age" name="age" [(ngModel)]="euser.age" placeholder="Your age..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="address">Address</label>
+            </div>
+            <div class="col-75">
+                <textarea id="address" name="address" placeholder="Your address.." [(ngModel)]="euser.address"
+                    style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="row" *ngIf="editflag">
+            <input type="submit" value="Submit" (click)="updateUser()">
+        </div>
+        <div class="row" *ngIf="addflag">
+            <input type="submit" value="Submit" (click)="saveUser()">
+        </div>
+    </div>
+</div>

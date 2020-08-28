@@ -1,0 +1,10 @@
+<div class="header">
+    <a href="#default" class="logo">CompanyLogo</a>
+    <div class="header-right">
+        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['users']">Users</a>
+        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['login']">Login</a>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>
